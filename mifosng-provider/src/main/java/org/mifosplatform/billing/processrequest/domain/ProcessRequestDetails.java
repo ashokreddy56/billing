@@ -52,6 +52,9 @@ public class ProcessRequestDetails extends AbstractAuditableCustom<AppUser, Long
 	
 	@Column(name = "start_date")
 	private Date startDate;
+	
+	@Column(name = "service_class")
+	private String serviceclass="service";
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "end_date")
@@ -71,7 +74,7 @@ public class ProcessRequestDetails extends AbstractAuditableCustom<AppUser, Long
 	          this.sentMessage=sentMessage;
 	          this.receiveMessage=recievedMessage;
 	          this.isDeleted=isDeleted;
-	         
+	          
 	          this.hardwareId=hardwareId;
 	          this.startDate=startDate;
 	          this.endDate=endDate;
@@ -102,6 +105,9 @@ public class ProcessRequestDetails extends AbstractAuditableCustom<AppUser, Long
 		this.receiveMessage = command.stringValueOfParameterNamed("receiveMessage");
 	    }
 	}
+
+	
+	
 
 
 

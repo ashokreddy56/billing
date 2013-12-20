@@ -21,6 +21,7 @@ public class ResponseCorsFilter implements ContainerResponseFilter {
     @Override
     public ContainerResponse filter(ContainerRequest request, ContainerResponse response) {
 
+    	
         ResponseBuilder resp = Response.fromResponse(response.getResponse());
 
         resp.header("Access-Control-Allow-Origin", "*")
@@ -28,7 +29,7 @@ public class ResponseCorsFilter implements ContainerResponseFilter {
                 .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
 
         String reqHead = request.getHeaderValue("Access-Control-Request-Headers");
-
+        
         if (null != reqHead && !reqHead.equals(null)) {
             resp.header("Access-Control-Allow-Headers", reqHead);
         }

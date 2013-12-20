@@ -71,5 +71,7 @@ public class MifosPlatformTenant {
 	public String getTenantIdentifier() {
 		 return this.tenantIdentifier;
 	}
+	
+	
 
 }

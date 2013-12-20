@@ -38,6 +38,9 @@ public class ProcessRequest extends AbstractPersistable<Long>{
 
 	@Column(name = "is_notify")
 	private char isNotify='N';
+	
+	@Column(name = "user_name")
+	private String userName="OBS";
 
 
 

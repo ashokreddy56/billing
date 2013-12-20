@@ -580,13 +580,11 @@ public class OrderWritePlatformServiceImpl implements OrderWritePlatformService 
 				requstStatus = UserActionStatusTypeEnum.MESSAGE.toString();
 				message = command.stringValueOfParameterNamed("message");
 			}
-
-			if (plan.getProvisionSystem().equalsIgnoreCase("Comvenient") && requstStatus != null) {
 				
-				  AllocationDetailsData detailsData = this.allocationReadPlatformService
+			    AllocationDetailsData detailsData = this.allocationReadPlatformService
 						.getTheHardwareItemDetails(command.entityId());
 
-				  ProcessRequest processRequest = new ProcessRequest(order.getClientId(),
+				ProcessRequest processRequest = new ProcessRequest(order.getClientId(),
 						order.getId(),plan.getProvisionSystem(), 'N', null, requstStatus,new Long(0));
 				
 				  processRequest.setNotify();
@@ -614,7 +612,7 @@ public class OrderWritePlatformServiceImpl implements OrderWritePlatformService 
 					}
 				}
 				this.processRequestRepository.save(processRequest);
-			}
+			
 
 			this.orderRepository.save(order);
 			AppUser appUser = this.context.authenticatedUser();

@@ -6,6 +6,7 @@
 package org.mifosplatform.infrastructure.security.filter;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -67,16 +68,24 @@ public class TenantAwareBasicAuthenticationFilter extends BasicAuthenticationFil
 
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
-
+        
         StopWatch task = new StopWatch();
         task.start();
 
         try {
-
+        	String data=request.getRequestURL().toString();
+        	
             if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
                 // ignore to allow 'preflight' requests from AJAX applications
                 // in different origin (domain name)
-            } else {
+            	 
+            }else if( data.contains("/entitlements/getauth") || data.contains("/entitlements/getuser") ){
+            	
+            	  final MifosPlatformTenant tenant = this.tenantDetailsService.loadTenantById("default");
+                  
+                  ThreadLocalContextUtil.setTenant(tenant);
+      	
+            }else {
 
                 String tenantId = request.getHeader(tenantRequestHeader);
                 if (org.apache.commons.lang.StringUtils.isBlank(tenantId)) {
@@ -91,9 +100,12 @@ public class TenantAwareBasicAuthenticationFilter extends BasicAuthenticationFil
                 final MifosPlatformTenant tenant = this.tenantDetailsService.loadTenantById(tenantId);
 
                 ThreadLocalContextUtil.setTenant(tenant);
+                
             }
 
             super.doFilter(req, res, chain);
+          
+            
         } catch (InvalidTenantIdentiferException e) {
             // deal with exception at low level
             SecurityContextHolder.getContext().setAuthentication(null);

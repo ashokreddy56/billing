@@ -74,6 +74,7 @@ public class JdbcTenantDetailsService implements TenantDetailsService {
             return this.jdbcTemplate.queryForObject(sql, rm, new Object[] { tenantIdentifier });
         } catch (EmptyResultDataAccessException e) {
             throw new InvalidTenantIdentiferException("The tenant identifier: " + tenantIdentifier + " is not valid.");
+           
         }
     }
 

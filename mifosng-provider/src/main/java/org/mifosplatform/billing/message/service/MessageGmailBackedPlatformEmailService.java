@@ -175,13 +175,6 @@ public class MessageGmailBackedPlatformEmailService implements
 	public void sendToUserMobile(String message, Long id) {
 		// TODO Auto-generated method stub
 		try {
-			/*
-			 * String retval = ""; postData += "User=" +
-			 * URLEncoder.encode(User,"UTF-8") + "&passwd=" + passwd +
-			 * "&mobilenumber=" + mobilenumber + "&message=" +
-			 * URLEncoder.encode(message,"UTF-8") + "&sid=" + sid + "&mtype=" +
-			 * mtype + "&DR=" + DR;
-			 */
 
 			String retval = "";
 			URL url = new URL("http://smscountry.com/SMSCwebservice_Bulk.aspx");
